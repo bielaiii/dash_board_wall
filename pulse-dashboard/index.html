@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f0">
+  <meta name="description" content="随一天变化的本机状态台：物理核心、GPU、Git 与 Codex。">
+  <title>Pulse · 个人状态台</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page-atmosphere" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>PULSE<span class="brand-dot">.</span></span><span class="brand-note">PERSONAL SPACE / LIVE SYSTEM</span></div>
+      <div class="top-actions"><span class="live-badge"><i></i><span id="connection-label">连接中</span></span><span id="host-label" class="host-label">LOCAL MACHINE</span><button type="button" class="top-button" id="fullscreen-button" title="切换全屏（F）" aria-label="进入全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m13-5v4a1 1 0 0 1-1 1h-4"/></svg><span id="fullscreen-label">全屏</span></button><button type="button" class="top-button icon-only" id="settings-button" title="设置" aria-label="打开设置"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15.1l1.1 1.9-2 2-1.9-1.1a8 8 0 0 1-2 .8L14 21h-4l-.6-2.3a8 8 0 0 1-2-.8L5.5 19l-2-2 1.1-1.9a8 8 0 0 1-.8-2L1.5 12l2.3-1.1a8 8 0 0 1 .8-2L3.5 7l2-2 1.9 1.1a8 8 0 0 1 2-.8L10 3h4l.6 2.3a8 8 0 0 1 2 .8L18.5 5l2 2-1.1 1.9a8 8 0 0 1 .8 2l2.3 1.1-2.3 1.1a8 8 0 0 1-.8 2Z"/></svg></button></div>
+    </header>
+
+    <div class="layout">
+      <section class="hero panel" aria-label="当前时间"><div class="sky" aria-hidden="true"><div class="sky-stars"></div><div class="sky-orb"></div><div class="sky-horizon"></div></div><div class="hero-head"><span class="eyebrow"><i></i>THE PRESENT MOMENT</span><span id="timezone">ASIA / SHANGHAI</span></div><div class="hero-content"><p id="greeting">今天也有新的可能。</p><div class="time-row"><span id="clock">00:00</span><span id="seconds">00</span></div><div class="hero-date"><span class="date-point"></span><span id="date">正在读取日期</span><span class="date-divider">/</span><span id="period-label">白昼</span></div></div><div class="hero-bottom"><span>YOUR DAY, IN MOTION</span><div class="day-progress"><span>今日进度</span><div><i id="day-progress-fill"></i></div><b id="day-progress-text">0%</b></div></div></section>
+
+      <section class="gpu-card panel" aria-labelledby="gpu-heading"><div class="panel-head"><div><span class="eyebrow">01 / GRAPHICS ENGINE</span><h2 id="gpu-heading">GPU <em>图形引擎</em></h2></div><span class="head-glyph">◈</span></div><div class="gpu-main"><div class="gpu-art" id="gpu-gauge" role="img" aria-label="GPU 实时占用率"><svg class="gpu-diagram" viewBox="0 0 620 286" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="gpu-body-mask"><rect x="29" y="54" width="561" height="225" rx="34"/></clipPath>
+    <pattern id="gpu-fin-lines" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M2 0V6" stroke="currentColor" stroke-width="1.2"/></pattern>
+    <pattern id="gpu-contact-lines" width="5" height="13" patternUnits="userSpaceOnUse"><path d="M2 1V11" stroke="currentColor" stroke-width="2"/></pattern>
+  </defs>
+  <g clip-path="url(#gpu-body-mask)">
+    <rect class="gpu-diagram-base" x="29" y="54" width="561" height="225"/>
+    <rect class="gpu-level" id="gpu-fill" x="29" y="54" width="561" height="225"/>
+    <path class="gpu-center-panel" d="M184 54H436L335 151Q310 176 285 151ZM285 182Q310 157 335 182L436 279H184Z"/>
+    <path class="gpu-fin-area" d="M62 65H178Q205 65 228 88L295 151Q310 165 295 180L228 247Q205 268 178 268H62Q42 268 42 245V88Q42 65 62 65ZM558 65H442Q415 65 392 88L325 151Q310 165 325 180L392 247Q415 268 442 268H558Q578 268 578 245V88Q578 65 558 65Z"/>
+    <path class="gpu-fin-pattern" d="M62 65H178Q205 65 228 88L295 151Q310 165 295 180L228 247Q205 268 178 268H62Q42 268 42 245V88Q42 65 62 65ZM558 65H442Q415 65 392 88L325 151Q310 165 325 180L392 247Q415 268 442 268H558Q578 268 578 245V88Q578 65 558 65Z"/>
+    <path class="gpu-x-lines" d="M177 54Q203 54 225 75L300 148Q310 158 320 148L395 75Q417 54 443 54M177 279Q203 279 225 258L300 185Q310 175 320 185L395 258Q417 279 443 279"/>
+  </g>
+  <rect class="gpu-body-outline" x="29" y="54" width="561" height="225" rx="34"/>
+  <path class="gpu-bracket" d="M18 4H30V82H32V225H18Z"/>
+  <path class="gpu-connector" d="M110 54V31H131V41H138V31H268V54M268 54H285V39H295V31H303V54"/>
+  <rect class="gpu-contact-strip" x="140" y="32" width="126" height="12"/>
+  <path class="gpu-connector-detail" d="M111 45H267M132 31V41M138 31V41"/>
+  <text class="gpu-brand-mark" x="238" y="260" transform="rotate(-43 238 260)">RTX 5090</text>
+</svg></div><div class="gpu-summary"><div class="gpu-load-value"><strong id="gpu-value">—</strong><span>% GPU LOAD</span></div><div class="gpu-name" id="gpu-name">正在读取 GPU</div><div class="gpu-vram-label"><span>显存占用</span><b id="gpu-vram">—</b></div><div class="gpu-vram-track"><i id="gpu-vram-fill"></i></div><div class="gpu-summary-note" id="gpu-detail">等待实时采样</div><div class="gpu-telemetry"><div><span>TEMP</span><strong id="gpu-temp">—</strong></div><div><span>POWER</span><strong id="gpu-power">—</strong></div><div><span>CLOCK</span><strong id="gpu-clock">—</strong></div></div>
+      </div></div></section>
+
+      <section class="cpu-card panel" aria-labelledby="cpu-heading"><div class="panel-head"><div><span class="eyebrow">02 / PROCESSOR TOPOLOGY</span><h2 id="cpu-heading">CPU <em>核心脉搏</em></h2></div><div class="cpu-total"><strong id="cpu-value">—</strong><span>% 总占用</span></div></div><div class="cpu-subhead"><span id="cpu-detail">正在读取核心拓扑</span><span id="cpu-source">物理核心</span></div><div class="core-grid" id="core-grid" aria-label="每个物理核心的占用率"></div></section>
+
+      <section class="activity-card panel" aria-labelledby="activity-heading"><div class="panel-head"><div><span class="eyebrow">03 / CODE IN MOTION</span><h2 id="activity-heading">Git <em>活跃度</em></h2></div><span class="head-glyph green">↗</span></div><div class="activity-total"><strong id="git-total">—</strong><span>次提交 <small>过去 365 天</small></span></div><div class="heatmap-wrap"><div class="heatmap-months" id="heatmap-months"></div><div class="heatmap-layout"><div class="weekday-labels"><span>周一</span><span>周三</span><span>周五</span></div><div class="heatmap" id="heatmap" role="img" aria-label="过去一年的 Git 提交热力图"></div></div></div><div class="heatmap-foot"><span id="git-repos">正在统计仓库</span><span class="legend">少 <i></i><i></i><i></i><i></i> 多</span></div></section>
+
+      <section class="system-card panel" aria-label="内存和网络"><div class="system-cell"><div class="system-head"><span>MEMORY / 内存</span><span class="system-symbol">▥</span></div><div class="system-value"><strong id="memory-value">—</strong><span>%</span></div><div class="system-track"><i id="memory-fill"></i></div><span class="system-detail" id="memory-detail">正在采样</span></div><div class="system-cell network-cell"><div class="system-head"><span>NETWORK / 网络</span><span class="system-symbol">↗</span></div><div class="network-lines"><div><span>↓ 下载</span><strong id="network-down">—</strong></div><div><span>↑ 上传</span><strong id="network-up">—</strong></div></div></div></section>
+
+      <div class="account-stack"><section class="codex-card panel" aria-labelledby="codex-heading"><div class="panel-head"><div><span class="eyebrow">04 / CREATIVE FUEL</span><h2 id="codex-heading">Codex <em>额度</em></h2></div><span class="head-glyph violet">✳</span></div><div class="quota-list"><div class="quota-item"><div class="quota-top"><span>5 小时窗口</span><strong id="quota-5h">—</strong></div><div class="quota-track"><i id="quota-5h-bar"></i></div><span id="quota-5h-reset">重置时间 —</span></div><div class="quota-item"><div class="quota-top"><span>7 天窗口</span><strong id="quota-7d">—</strong></div><div class="quota-track purple"><i id="quota-7d-bar"></i></div><span id="quota-7d-reset">重置时间 —</span></div></div><div class="codex-foot"><span id="codex-source">正在读取本地会话</span><span>CREDITS <b id="credits-balance">—</b></span></div></section><section class="recharge-card panel" aria-labelledby="recharge-heading"><span class="eyebrow">NEXT UP</span><h2 id="recharge-heading">下一次充值</h2><p id="recharge-hint">在设置中填写时间</p><div class="recharge-date"><strong id="recharge-day">—</strong><span id="recharge-month">未设置</span></div><div class="recharge-line" aria-label="未来 30 天倒计时进度"><i id="recharge-progress"></i></div><span id="recharge-countdown">点击右上角设置</span></section></div>
+    </div>
+    <footer class="footer"><span>DESIGNED FOR THE RHYTHM OF YOUR DAY</span><span id="last-update">等待首次更新</span><span>LOCAL ONLY · PULSE 02</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="modal-backdrop" hidden></div><dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title"><form method="dialog" id="settings-form"><div class="settings-head"><div><span class="eyebrow">MAKE IT YOURS</span><h2 id="settings-title">仪表盘设置</h2></div><button type="button" class="close-button" id="close-settings" aria-label="关闭">×</button></div><label for="recharge-input">下一次充值时间</label><input type="datetime-local" id="recharge-input"><p>此时间只保存在当前浏览器。Codex 的 5 小时和 7 天窗口重置时间由本地会话记录读取。</p><button class="save-button" type="submit">保存设置 <span>→</span></button></form></dialog>
+</body>
+</html>
